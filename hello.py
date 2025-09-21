@@ -1,3 +1,4 @@
+
 """A slightly more complex greeting script."""
 
 import datetime
@@ -17,4 +18,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
