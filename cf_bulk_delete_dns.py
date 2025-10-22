@@ -194,7 +194,15 @@ def confirm(records: List[Dict[str, object]], *, assume_yes: bool) -> bool:
         print("No matching records found.")
         return False
 
-    print("The following records will be deleted:")
+    count = len(records)
+    print(f"The following {count} record(s) will be deleted:")
+
+    # Warn about large batch operations
+    if count > 50:
+        print(f"\n⚠️  WARNING: You are about to delete {count} DNS records!")
+        print("   Consider backing up your DNS records before proceeding.")
+        print("   Use --dry-run to preview without making changes.\n")
+
     print("ID".ljust(36), "TYPE".ljust(6), "NAME".ljust(40), "CONTENT")
     print("-" * 110)
     for record in records:

@@ -1,0 +1,6 @@
+# Python dependencies for cursorcs project
+#
+# This project currently uses only Python standard library modules.
+# Minimum Python version: 3.8
+#
+# No external dependencies are required.

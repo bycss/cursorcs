@@ -54,6 +54,18 @@ def complete_task(index: int) -> None:
     print(f"Completed task {index}: {task['description']}")
 
 
+def delete_task(index: int) -> None:
+    tasks = load_tasks()
+    try:
+        task = tasks[index - 1]
+    except IndexError:
+        print(f"No task with index {index}")
+        return
+    tasks.pop(index - 1)
+    save_tasks(tasks)
+    print(f"Deleted task {index}: {task['description']}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Simple task manager")
     subparsers = parser.add_subparsers(dest="command")
@@ -71,6 +83,9 @@ def main() -> None:
     done_parser = subparsers.add_parser("done", help="Mark a task as completed")
     done_parser.add_argument("index", type=int)
 
+    delete_parser = subparsers.add_parser("delete", help="Delete a task")
+    delete_parser.add_argument("index", type=int)
+
     args = parser.parse_args()
 
     if args.command == "add":
@@ -79,6 +94,8 @@ def main() -> None:
         list_tasks(show_all=not args.pending)
     elif args.command == "done":
         complete_task(args.index)
+    elif args.command == "delete":
+        delete_task(args.index)
     else:
         parser.print_help()
 
